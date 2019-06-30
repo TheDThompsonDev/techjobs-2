@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <form th:object="${jobForm}" method="post">
+
+        <div class="form-group">
+            <label th:for="name">Name</label>
+            <input th:field="*{name}" />
+            <div th:errors="*{name}"></div>
+        </div>
+
+        <div class="form-group">
+            <label th:for="employerId">Employer</label>
+            <select th:field="*{employerId}">
+                <option th:each="employer : *{employers}"
+                        th:value="${employer.id}"
+                        th:text="${employer.value}"></option>
+            </select>
+        </div>
+
+        <!-- TODO #5 - Create <select> dropdowns for other job fields -->
+        <div class="form-group">
+            <label th:for="locationId">Location</label>
+            <select th:field="*{locationId}">
+                <option th:each="location : *{locations}"
+                        th:value="${location.id}"
+                        th:text="${location.value}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label th:for="positionTypeId">Position Type</label>
+            <select th:field="*{positionTypeId}">
+                <option th:each="position : *{positionTypes}"
+                        th:value="${position.id}"
+                        th:text="${position.value}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label th:for="coreCompetencyId">Employer</label>
+            <select th:field="*{coreCompetencyId}">
+                <option th:each="skill : *{coreCompetencies}"
+                        th:value="${skill.id}"
+                        th:text="${skill.value}"></option>
+            </select>
+        </div>
+        <input type="submit" value="Add Job" />
+    </form>
+
+</div>
+
+</body>
+</html>

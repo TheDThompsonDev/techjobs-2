@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+    <div th:unless="${jobs} and ${jobs.size()}">
+        <h2>No Results</h2>
+    </div>
+
+    <div th:fragment="jobs-list">
+        <div th:if="${jobs} and ${jobs.size()}">
+
+            <h3 th:text="${jobs.size() + ' Result(s)'}"></h3>
+
+            <div  th:each="job : ${jobs}">
+                <table  th:fragment="single-job" class="job-listing">
+                    <tr>
+                        <th>Name</th>
+                        <td th:text="${job.name}"></td>
+                    </tr>
+                    <tr>
+                        <th>Employer</th>
+                        <td th:text="${job.employer}"></td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td th:text="${job.location}"></td>
+                    </tr>
+                    <tr>
+                        <th>Position Type</th>
+                        <td th:text="${job.positionType}"></td>
+                    </tr>
+                    <tr>
+                        <th>Skill</th>
+                        <td th:text="${job.coreCompetency}"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
